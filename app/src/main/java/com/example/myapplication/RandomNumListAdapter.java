@@ -25,7 +25,7 @@ public class RandomNumListAdapter extends RecyclerView.Adapter<RecyclerViewHolde
     public RandomNumListAdapter(int seed) {
 
         this.random = new Random(seed);
-        //TODO: code breaks when preparing hardcoded case
+        //TODO: code breaks when preparing hardcoded case, try not putting the init of the test case in the constructor of this class, try put it under onCreateView or smth else
 //        ArrayList<String> tags = new ArrayList<String>();
 //        tags.add("urgent");
 //        tags.add("Science");
