@@ -47,6 +47,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/line"
                     android:layout_width="3dp"
                     android:layout_height="39dp"
                     android:layout_marginEnd="8dp"
@@ -71,7 +72,7 @@
                     app:srcCompat="@drawable/three_dots_more_button" />
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/tag1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
@@ -85,7 +86,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/randomText" />
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/tag2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="84dp"
