@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -22,13 +24,15 @@ public class RandomNumListAdapter extends RecyclerView.Adapter<RecyclerViewHolde
     private Tasks tasks;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public RandomNumListAdapter(int seed) {
+    public RandomNumListAdapter(int seed, Tasks tasks) {
 
         this.random = new Random(seed);
+        this.tasks = tasks;
         //TODO: code breaks when preparing hardcoded case, try not putting the init of the test case in the constructor of this class, try put it under onCreateView or smth else
 //        ArrayList<String> tags = new ArrayList<String>();
 //        tags.add("urgent");
 //        tags.add("Science");
+//
 //        LocalDateTime rightnow = LocalDateTime.now();
 //        Task task1 = new Task("Revise math", "I hate math", "orange", rightnow, rightnow, tags, "urgent");
 //        Task task2 = new Task("test2", "i love math", "blue", rightnow, rightnow, tags, "due");
@@ -37,8 +41,8 @@ public class RandomNumListAdapter extends RecyclerView.Adapter<RecyclerViewHolde
 //        tasks.addTask(task2);
 //        tasks.addTask(task3);
 
-
     }
+
 
     @Override
     public int getItemViewType(final int position) {
@@ -53,25 +57,28 @@ public class RandomNumListAdapter extends RecyclerView.Adapter<RecyclerViewHolde
         return new RecyclerViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
+        if (position != tasks.getSize()) {
+            Task task;
+    //        holder.getView().setText(kode[position]);
+    //        holder.getView_title().setText(String.valueOf(random.nextInt()));
+            holder.getView_tag1().setText(String.valueOf(random.nextInt()));
 
-        holder.getView().setText(kode[position]);
-        holder.getView_title().setText(String.valueOf(random.nextInt()));
-        holder.getView_tag1().setText(String.valueOf(random.nextInt()));
 
-        /**
-         * //        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
-         * //        Task task = tasks.getTask(position);
-         * //        holder.getView().setText(task.getStartDateTime().format(formatter));
-         * //        holder.getView_title().setText(task.getTitle());
-         * //        holder.getView_tag1().setText(task.getStatus());
-         *         holder.getView_tag2().setText(String.valueOf(random.nextInt()));
-         */
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm a");
+            task = tasks.getTask(position);
+            holder.getView().setText(task.getStartDateTime().format(formatter));
+            holder.getView_title().setText(task.getTitle());
+            holder.getView_tag1().setText(task.getTag());
+            holder.getView_tag2().setText(task.getSubject());
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return 100;
+        return tasks.getSize();
     }
 }

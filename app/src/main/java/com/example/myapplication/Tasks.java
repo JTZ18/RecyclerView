@@ -26,5 +26,6 @@ public class Tasks {
         this.tasks.remove(task);
     }
     public Task getTask(int position) { return this.tasks.get(position); }
+    public int getSize() { return this.tasks.size(); }
 
 }
